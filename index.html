@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fabio Dollaku - Profile</title>
+  <style>
+    :root {
+      --bg-light: #ffffff;
+      --bg-light-secondary: #f8f9fa;
+      --text-light: #1a1a1a;
+      --text-light-secondary: #555555;
+      --border-light: #e0e0e0;
+      --accent: #0066cc;
+      --accent-hover: #0052a3;
+
+      --bg-dark: #1a1a1a;
+      --bg-dark-secondary: #2d2d2d;
+      --text-dark: #f0f0f0;
+      --text-dark-secondary: #b0b0b0;
+      --border-dark: #404040;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background-color: var(--bg-light);
+      color: var(--text-light);
+      line-height: 1.6;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    body.dark-mode {
+      background-color: var(--bg-dark);
+      color: var(--text-dark);
+    }
+
+    /* Theme toggle button */
+    .theme-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: var(--accent);
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background-color 0.3s ease;
+      z-index: 1000;
+    }
+
+    .theme-toggle:hover {
+      background-color: var(--accent-hover);
+    }
+
+    /* Container */
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    /* Header / Hero */
+    header {
+      text-align: center;
+      padding-bottom: 40px;
+      border-bottom: 1px solid;
+      border-color: var(--border-light);
+      margin-bottom: 40px;
+    }
+
+    body.dark-mode header {
+      border-color: var(--border-dark);
+    }
+
+    .profile-name {
+      font-size: 2.5em;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .profile-title {
+      font-size: 1.2em;
+      color: var(--text-light-secondary);
+      margin-bottom: 20px;
+    }
+
+    body.dark-mode .profile-title {
+      color: var(--text-dark-secondary);
+    }
+
+    .contact-info {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      font-size: 0.95em;
+    }
+
+    .contact-info a {
+      color: var(--accent);
+      text-decoration: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .contact-info a:hover {
+      opacity: 0.7;
+    }
+
+    /* Section styling */
+    section {
+      margin-bottom: 50px;
+    }
+
+    h2 {
+      font-size: 1.8em;
+      font-weight: 600;
+      margin-bottom: 25px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--accent);
+      display: inline-block;
+    }
+
+    /* Experience / Education Items */
+    .item {
+      margin-bottom: 30px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid;
+      border-color: var(--border-light);
+    }
+
+    body.dark-mode .item {
+      border-color: var(--border-dark);
+    }
+
+    .item:last-child {
+      border-bottom: none;
+    }
+
+    .item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 8px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .item-title {
+      font-weight: 600;
+      font-size: 1.1em;
+    }
+
+    .item-date {
+      font-size: 0.9em;
+      color: var(--text-light-secondary);
+    }
+
+    body.dark-mode .item-date {
+      color: var(--text-dark-secondary);
+    }
+
+    .item-subtitle {
+      font-size: 0.95em;
+      color: var(--text-light-secondary);
+      margin-bottom: 8px;
+    }
+
+    body.dark-mode .item-subtitle {
+      color: var(--text-dark-secondary);
+    }
+
+    .item-description {
+      font-size: 0.95em;
+      line-height: 1.6;
+    }
+
+    /* Skills section */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+    }
+
+    .skill-category {
+      padding: 20px;
+      background-color: var(--bg-light-secondary);
+      border-radius: 8px;
+      border-left: 4px solid var(--accent);
+    }
+
+    body.dark-mode .skill-category {
+      background-color: var(--bg-dark-secondary);
+    }
+
+    .skill-category h3 {
+      font-size: 1em;
+      margin-bottom: 12px;
+      color: var(--accent);
+    }
+
+    .skill-list {
+      list-style: none;
+      font-size: 0.95em;
+    }
+
+    .skill-list li {
+      padding: 6px 0;
+      line-height: 1.4;
+    }
+
+    /* Languages section */
+    .languages-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 20px;
+    }
+
+    .language-card {
+      padding: 18px;
+      background-color: var(--bg-light-secondary);
+      border-radius: 8px;
+      text-align: center;
+      border: 1px solid var(--border-light);
+    }
+
+    body.dark-mode .language-card {
+      background-color: var(--bg-dark-secondary);
+      border-color: var(--border-dark);
+    }
+
+    .language-name {
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--accent);
+    }
+
+    .language-level {
+      font-size: 0.9em;
+      color: var(--text-light-secondary);
+    }
+
+    body.dark-mode .language-level {
+      color: var(--text-dark-secondary);
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding-top: 40px;
+      border-top: 1px solid;
+      border-color: var(--border-light);
+      margin-top: 60px;
+      font-size: 0.9em;
+      color: var(--text-light-secondary);
+    }
+
+    body.dark-mode footer {
+      border-color: var(--border-dark);
+      color: var(--text-dark-secondary);
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .container {
+        padding: 20px 15px;
+      }
+
+      .profile-name {
+        font-size: 2em;
+      }
+
+      .contact-info {
+        gap: 10px;
+      }
+
+      .item-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .skills-grid,
+      .languages-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .theme-toggle {
+        top: 10px;
+        right: 10px;
+        padding: 8px 12px;
+        font-size: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <button class="theme-toggle" onclick="toggleTheme()">🌙 Dark Mode</button>
+
+  <div class="container">
+    <!-- Header -->
+    <header>
+      <h1 class="profile-name">Fabio Dollaku</h1>
+      <p class="profile-title">MSc High-Performance Computing | CS Engineer | Researcher</p>
+      <div class="contact-info">
+        <span>📧 <a href="mailto:fabio.dollaku@gmail.com">fabio.dollaku@gmail.com</a></span>
+        <span>📱 <a href="tel:+352661929393">+352 661 929 393</a></span>
+        <span>📍 Esch-sur-Alzette, Luxembourg</span>
+        <span><a href="https://github.com/yourusername">GitHub</a></span>
+        <span><a href="https://linkedin.com/in/yourusername">LinkedIn</a></span>
+      </div>
+    </header>
+
+    <!-- About Section -->
+    <section id="about">
+      <h2>About</h2>
+      <p>
+        Computer Science professional and MSc student in High-Performance Computing at the University of Luxembourg. 
+        Passionate about AI safety, LLM alignment, formal verification, and parallel computing. 
+        Experienced in machine learning, system administration, and web development. 
+        Currently researching how Large Language Models can be constrained to obey International Humanitarian Law.
+      </p>
+    </section>
+
+    <!-- Current Education -->
+    <section id="education">
+      <h2>Education</h2>
+      
+      <div class="item">
+        <div class="item-header">
+          <div>
+            <div class="item-title">Master of Science in High-Performance Computing</div>
+            <div class="item-subtitle">University of Luxembourg</div>
+          </div>
+          <div class="item-date">Sep 2024 – Present</div>
+        </div>
+        <div class="item-description">
+          Focus on parallel computing algorithms, HPC optimization, and machine learning alignment research.
+        </div>
+      </div>
+
+      <div class="item">
+        <div class="item-header">
+          <div>
+            <div class="item-title">Master of Science in Information Technology</div>
+            <div class="item-subtitle">Albanian University</div>
+          </div>
+          <div class="item-date">Oct 2022 – Jun 2024</div>
+        </div>
+      </div>
+
+      <div class="item">
+        <div class="item-header">
+          <div>
+            <div class="item-title">Bachelor of Science in Computer Engineering</div>
+            <div class="item-subtitle">Albanian University</div>
+          </div>
+          <div class="item-date">Oct 2019 – Jul 2022</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience -->
+    <section id="experience">
+      <h2>Experience</h2>
+
+      <div class="item">
+        <div class="item-header">
+          <div>
+            <div class="item-title">Student Researcher</div>
+            <div class="item-subtitle">Luxembourg Tech School</div>
+          </div>
+          <div class="item-date">Nov 2025 – Dec 2025</div>
+        </div>
+        <div class="item-description">
+          Working on LLMs to ensure they obey International Humanitarian Law using Python, with training on both HPC clusters and local systems.
+        </div>
+      </div>
+
+      <div class="item">
+        <div class="item-header">
+          <div>
+            <div class="item-title">Research Support</div>
+            <div class="item-subtitle">University of Luxembourg</div>
+          </div>
+          <div class="item-date">Feb 2025 – May 2025</div>
+        </div>
+        <div class="item-description">
+          Supporting research in High-Performance Computing under faculty supervision.
+        </div>
+      </div>
+
+      <div class="item">
+        <div class="item-header">
+          <div>
+            <div class="item-title">Research Support</div>
+            <div class="item-subtitle">University of Luxembourg</div>
+          </div>
+          <div class="item-date">Nov 2024 – Dec 2024</div>
+        </div>
+        <div class="item-description">
+          Supporting research in High-Performance Computing under faculty supervision.
+        </div>
+      </div>
+
+      <div class="item">
+        <div class="item-header">
+          <div>
+            <div class="item-title">System and Network Administrator</div>
+            <div class="item-subtitle">Hysenbelliu Group</div>
+          </div>
+          <div class="item-date">Nov 2023 – Aug 2024</div>
+        </div>
+        <div class="item-description">
+          Managed external network infrastructure and multi-purpose systems, including financial systems and server operations.
+        </div>
+      </div>
+
+      <div class="item">
+        <div class="item-header">
+          <div>
+            <div class="item-title">Web Developer</div>
+            <div class="item-subtitle">Sustainable Finance and Innovation Centre (NGO)</div>
+          </div>
+          <div class="item-date">Nov 2022 – Ongoing</div>
+        </div>
+        <div class="item-description">
+          Creation and management of organizational website.
+        </div>
+      </div>
+
+      <div class="item">
+        <div class="item-header">
+          <div>
+            <div class="item-title">Learning Practice</div>
+            <div class="item-subtitle">AK-Invest</div>
+          </div>
+          <div class="item-date">Jul 2022 – Aug 2022</div>
+        </div>
+        <div class="item-description">
+          Management of IT systems and daily technical support.
+        </div>
+      </div>
+
+      <div class="item">
+        <div class="item-header">
+          <div>
+            <div class="item-title">Design Processing</div>
+            <div class="item-subtitle">Drone Advertisement</div>
+          </div>
+          <div class="item-date">Feb 2021 – May 2021</div>
+        </div>
+        <div class="item-description">
+          Design editing and adaptation for print materials.
+        </div>
+      </div>
+    </section>
+
+    <!-- International Experience -->
+    <section id="international">
+      <h2>International Programs</h2>
+
+      <div class="item">
+        <div class="item-header">
+          <div>
+            <div class="item-title">Erasmus+ Trainee Student – Nanoscience</div>
+            <div class="item-subtitle">University of Jyväskylä, Finland</div>
+          </div>
+          <div class="item-date">Aug 2022 – Oct 2022</div>
+        </div>
+        <div class="item-description">
+          Participated in nanoscience applications development and published scientific article in collaboration with researchers.
+        </div>
+      </div>
+
+      <div class="item">
+        <div class="item-header">
+          <div>
+            <div class="item-title">33rd Summer School Participant</div>
+            <div class="item-subtitle">University of Jyväskylä, Finland</div>
+          </div>
+          <div class="item-date">Aug 8 – Aug 22, 2022</div>
+        </div>
+        <div class="item-description">
+          Collaborated with scientific researchers and published a scientific article.
+        </div>
+      </div>
+
+      <div class="item">
+        <div class="item-header">
+          <div>
+            <div class="item-title">Erasmus+ Student Trainee – Robotics & AI</div>
+            <div class="item-subtitle">Biruni University, Istanbul, Turkey</div>
+          </div>
+          <div class="item-date">Sep 2021 – Nov 2021</div>
+        </div>
+        <div class="item-description">
+          AI development using Python programming language in robotics applications.
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills -->
+    <section id="skills">
+      <h2>Technical Skills</h2>
+      <div class="skills-grid">
+        <div class="skill-category">
+          <h3>Programming</h3>
+          <ul class="skill-list">
+            <li>Python</li>
+            <li>C / C++</li>
+            <li>Java</li>
+            <li>JavaScript</li>
+          </ul>
+        </div>
+
+        <div class="skill-category">
+          <h3>Specializations</h3>
+          <ul class="skill-list">
+            <li>High-Performance Computing</li>
+            <li>Parallel Computing</li>
+            <li>Machine Learning</li>
+            <li>AI Safety & Alignment</li>
+          </ul>
+        </div>
+
+        <div class="skill-category">
+          <h3>Databases & Systems</h3>
+          <ul class="skill-list">
+            <li>SQL</li>
+            <li>Oracle</li>
+            <li>System Administration</li>
+            <li>Network Management</li>
+          </ul>
+        </div>
+
+        <div class="skill-category">
+          <h3>Web & Other</h3>
+          <ul class="skill-list">
+            <li>Web Development</li>
+            <li>Teamwork</li>
+            <li>Technical Writing</li>
+            <li>Documentation</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Languages -->
+    <section id="languages">
+      <h2>Languages</h2>
+      <div class="languages-grid">
+        <div class="language-card">
+          <div class="language-name">Albanian</div>
+          <div class="language-level">Native Speaker</div>
+        </div>
+
+        <div class="language-card">
+          <div class="language-name">English</div>
+          <div class="language-level">Advanced (C1)</div>
+        </div>
+
+        <div class="language-card">
+          <div class="language-name">Turkish</div>
+          <div class="language-level">Intermediate (B1)</div>
+        </div>
+
+        <div class="language-card">
+          <div class="language-name">Italian</div>
+          <div class="language-level">Intermediate (B1)</div>
+        </div>
+
+        <div class="language-card">
+          <div class="language-name">French</div>
+          <div class="language-level">Pre-Intermediate (A2)</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Certifications -->
+    <section id="certifications">
+      <h2>Certifications & Training</h2>
+
+      <div class="item">
+        <div class="item-header">
+          <div>
+            <div class="item-title">MCR Certified Trainer (Facilitator)</div>
+            <div class="item-subtitle">Managing Climate Resilience Business Game (ToT)</div>
+          </div>
+          <div class="item-date">Oct 9–14, 2023</div>
+        </div>
+        <div class="item-description">
+          German Sparkassenstiftung Albania – Training focused on climate change impact management and optimal investment strategies.
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <p>© 2026 Fabio Dollaku. Based in Ville de Luxembourg, Luxembourg.</p>
+    </footer>
+  </div>
+
+  <script>
+    function toggleTheme() {
+      const body = document.body;
+      const button = document.querySelector('.theme-toggle');
+      
+      if (body.classList.contains('dark-mode')) {
+        body.classList.remove('dark-mode');
+        button.textContent = '🌙 Dark Mode';
+        localStorage.setItem('theme', 'light');
+      } else {
+        body.classList.add('dark-mode');
+        button.textContent = '☀️ Light Mode';
+        localStorage.setItem('theme', 'dark');
+      }
+    }
+
+    // Load saved theme preference
+    window.addEventListener('DOMContentLoaded', () => {
+      const savedTheme = localStorage.getItem('theme') || 'light';
+      const button = document.querySelector('.theme-toggle');
+      
+      if (savedTheme === 'dark') {
+        document.body.classList.add('dark-mode');
+        button.textContent = '☀️ Light Mode';
+      }
+    });
+  </script>
+</body>
+</html>
